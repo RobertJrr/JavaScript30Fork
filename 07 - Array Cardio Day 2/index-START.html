@@ -27,15 +27,58 @@
 
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
+    //returns true if finds element which makes provided function returns true
+    const isAdult = people.some(person =>{
+      //returns year
+      const currentYear = (new Date()).getFullYear();
+      return currentYear - person.year >= 19;
+    });
+
+    console.log(isAdult); //true
+    console.log({isAdult}); //shows name of variable and truth value
+
+
     // Array.prototype.every() // is everyone 19 or older?
+    const allAdults = people.every(person =>{
+      return new Date().getFullYear() - person.year >= 19;
+    });
+    console.log(allAdults); //false 
+
 
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
+    const foundComment = comments.find((comment) => {
+      return comment.id === 823423;
+    });
+
+    const foundComment2 = comments.find(comment => comment.id === 823423);
+    console.log(foundComment);
+    console.log(foundComment2);
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+    //get index position
+    const index = comments.findIndex(element => element.id === 823423);
+    //removes element from array 
+    // comments.splice(indexToDelete,1); //passing startIndex (to start deleting from) AND number of items to delete (1)
+    // console.log(comments);
+
+    //creating new array 
+    const newComments = [
+      //copy of array from start to index we want to remove (exlcudes that index) (dont mix up slice and splice)
+     ...comments.slice(0,index),
+      //copy everthing starting from AFTER index we dont want 
+     ...comments.slice(index + 1)
+
+     //without ... (spread operator), we get an array of arrays
+     //here, it merges then two arrays into one single one
+    ];
+
+    console.table(newComments);
+
+    
 
   </script>
 </body>
